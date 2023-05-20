@@ -1,5 +1,5 @@
 from flask import Flask, session, redirect,  render_template,  abort, request
-import
+from sqlite_defs import *
 
 app = Flask(__name__)
 app.secret_key = 'Stas_krutoy'
