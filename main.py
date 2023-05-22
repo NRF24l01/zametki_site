@@ -18,9 +18,10 @@ def add_task():
     task_name = request.form.get('task_name')
     task_description = request.form.get('task_description', '')
     user_name = session.get('name', False)
-    print(task_name, task_description)
+    print(task_name, task_description, user_name)
+    new_zametka(user_name, task_name, task_description)
 
-    return redirect('/')
+    return redirect('/tasks/')
 
 
 @app.route('/logout')

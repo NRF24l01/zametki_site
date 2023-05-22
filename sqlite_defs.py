@@ -6,7 +6,7 @@ def get_task_list():
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
 
-        who_like = cursor.execute("SELECT COUNT(*) FROM zametki").fetchall()[0][0]
+        tasks_len = cursor.execute("SELECT COUNT(*) FROM zametki").fetchall()[0][0]
 
         conn.commit()
 
@@ -17,12 +17,16 @@ def get_task_list():
         if (conn):
             conn.close()
 
+    for i in range(tasks_len):
+        pass
+
+
 def new_zametka(user_name:str, title:str, text:str):
     try:
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
 
-        cursor.execute(f"INSERT INTO 'zametki' (user_name, title, text) VALUES ()")
+        cursor.execute(f"INSERT INTO 'zametki' (user_name, title, text, state) VALUES ('{user_name}','{title}', '{text}', 'False')")
 
         conn.commit()
     except sqlite3.Error as error:
