@@ -12,6 +12,15 @@ app.secret_key = 'Stas_krutoy'
 def index():
     return redirect('/login')
 
+@app.route('/tasks')
+def watch_task():
+    user_name = session.get('name')
+    print(user_name)
+    tasks = get_task_list(user_name)
+    print(tasks)
+    done_count = len([task for task in tasks if task['is_done']])
+    count = len(tasks)
+    return render_template("tasks.html", tasks=tasks, done_count=done_count, count=count)
 
 @app.route('/tasks/add', methods=['post'])
 def add_task():
@@ -21,7 +30,7 @@ def add_task():
     print(task_name, task_description, user_name)
     new_zametka(user_name, task_name, task_description)
 
-    return redirect('/tasks/')
+    return redirect('/tasks')
 
 
 @app.route('/logout')
@@ -47,8 +56,11 @@ def login_post():
 
 @app.route('/login', methods=['get'])
 def login_get():
-    session['auth'] = True
-    return render_template('login.html', fleksim='')
+    print(session.get('auth'), type(session.get('auth')))
+    if session.get('auth') != None:
+        return redirect('/tasks')
+    else:
+        return render_template('login.html', fleksim='',name="Ваше имя пользователя", passw='Ваш пароль')
 
 
 app.run(debug=True, port='8000', host='0.0.0.0')
