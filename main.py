@@ -10,14 +10,17 @@ app.secret_key = 'Stas_krutoy'
 
 @app.route('/')
 def index():
-    return redirect('/login')
+    if session.get('name') == None:
+        return redirect('/login')
+    else:
+        return redirect('/tasks')
 
 @app.route('/tasks')
 def watch_task():
     user_name = session.get('name')
     print(user_name)
     tasks = get_task_list(user_name)
-    print(tasks)
+    #print(tasks)
     done_count = len([task for task in tasks if task['is_done']])
     count = len(tasks)
     return render_template("tasks.html", tasks=tasks, done_count=done_count, count=count)
@@ -27,7 +30,7 @@ def add_task():
     task_name = request.form.get('task_name')
     task_description = request.form.get('task_description', '')
     user_name = session.get('name', False)
-    print(task_name, task_description, user_name)
+    #print(task_name, task_description, user_name)
     new_zametka(user_name, task_name, task_description)
 
     return redirect('/tasks')
@@ -45,6 +48,7 @@ def login_post():
     user_name = request.form.get('username')
     password = request.form.get('password')
     suc = login(user_name, password)
+    #print(suc)
     if suc:
         session['name'] = user_name
         session['pass'] = password
@@ -56,7 +60,7 @@ def login_post():
 
 @app.route('/login', methods=['get'])
 def login_get():
-    print(session.get('auth'), type(session.get('auth')))
+    #print(session.get('auth'), type(session.get('auth')))
     if session.get('auth') != None:
         return redirect('/tasks')
     else:

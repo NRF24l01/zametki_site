@@ -93,13 +93,13 @@ def login(user_name:str, password:str) -> bool:
         bob = dt_pass[0][0]
     except:
         bob = "None"
-    #print(user_name, password)
+    #print(user_name, password, bob)
     if bob == "None":
         #print("bobiki")
         new_user(user_name, password)
         return True
     else:
-        if password==dt_pass:
+        if bob == password:
             return True
         else:
             return False
