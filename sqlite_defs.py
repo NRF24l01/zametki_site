@@ -1,6 +1,24 @@
 import sqlite3
 from config import db_name
 
+def upd_zametka(id: int, label: str, wwp: str):
+    print(id, label, wwp)
+    try:
+        conn = sqlite3.connect(db_name)
+        cursor = conn.cursor()
+        zapros = f"UPDATE zametki SET {label} = '{wwp}' WHERE id == {str(id)}"
+        print(zapros)
+        cursor.execute(zapros)
+
+        conn.commit()
+
+    except sqlite3.Error as error:
+        print("Error sql1: ", error)
+
+    finally:
+        if (conn):
+            conn.close()
+
 def get_task_list(user_name:str):
     try:
         conn = sqlite3.connect(db_name)
@@ -48,15 +66,14 @@ def get_task_list(user_name:str):
             finally:
                 if (conn):
                     conn.close()
-            deli = bool(list_with[3])
-            if deli:
-                ne_hlam = {}
-                ne_hlam["name"] = list_with[0]
-                ne_hlam["description"] = list_with[1]
-                ne_hlam["is_done"] = booling(list_with[2])
-                result.append(ne_hlam)
+            ne_hlam = {}
+            ne_hlam["name"] = list_with[0]
+            ne_hlam["description"] = list_with[1]
+            ne_hlam["is_done"] = booling(list_with[2])
+            ne_hlam["real_id"] = str(i)
+            ne_hlam["del"] = booling(list_with[3])
+            result.append(ne_hlam)
     return result
-
 
 def new_zametka(user_name:str, title:str, text:str):
     try:
