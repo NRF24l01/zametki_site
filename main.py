@@ -125,4 +125,4 @@ def login_get():
         return render_template('login.html', fleksim='',name="Ваше имя пользователя", passw='Ваш пароль')
 
 
-app.run(debug=True, port='8000', host='0.0.0.0')
+app.run(debug=True, port='80', host='0.0.0.0')

@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Form</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="static/scss/style.scss">
-    bac
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-<form class='login-form' method="post" action="/login">
-    <div class="flex-row logo">
+<form method="post" action="/login" class="container my-5">
+    <div class="text-center mb-5">
         <h1>Крутые заметки)</h1>
     </div>
-    <div class="flex-row">
-        <input id="username" name="username" class='lf--input' placeholder='{{name}}' type='text'>
+    <div class="form-group">
+        <label for="username">Имя пользователя:</label>
+        <input id="username" name="username" placeholder='{{name}}' type='text' class='form-control'>
     </div>
-    <div class="flex-row">
-        <input id="password" name="password" class='lf--input' placeholder='{{passw}}' type='password'>
+    <div class="form-group">
+        <label for="password">Пароль:</label>
+        <input id="password" name="password" placeholder='{{passw}}' type='password' class='form-control'>
     </div>
-    <input class='lf--submit' type='submit' value='Войти'>
-    <a class='lf--forgot' href='#'>{{fleksim}}</a>
+    <button type='submit' class='btn btn-primary mx-auto d-block' style='width: 200px;'>Войти</button>
+    <a href='#' class='ml-3'>{{fleksim}}</a>
 </form>
 
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

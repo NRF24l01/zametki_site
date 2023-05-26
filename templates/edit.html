@@ -4,22 +4,70 @@
     <meta charset="UTF-8">
     <title>Заметки</title>
 
+    <!-- добавляем ссылку на Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <style>
+        /* задаем стили для заголовка */
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+
+        /* задаем стили для формы */
+        form {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        /* задаем стили для кнопки */
+        button {
+            margin-top: 10px;
+        }
+
+        /* задаем стили для текстового поля */
+        input[type=text], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        /* задаем стили для параграфа */
         .center {
             text-align: center;
             list-style-position: inside;
             padding-inline-start: 0;
+            margin-bottom: 10px;
+        }
+
+        /* задаем стили для надписей над полями */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<h3 style="text-align: center;">Изменение задачи</h3>
+<h3>Изменение задачи</h3>
 
-<form action="/tasks/{{ task_id }}/edit" method="post">
-    <p class="center"><input name="task_name" type="text" value="{{ task['name'] }}" /><button>Сохранить</button></p>
-    <p class="center"><textarea name="task_description" placeholder="Описание">{{ task['description'] }}</textarea></p>
+<!-- добавляем классы для формы и параграфов -->
+<form class="form-group" action="/tasks/{{ task_id }}/edit" method="post">
+    <p class="center"><label for="task_description">Описание:</label><textarea id="task_description" name="task_description" placeholder="Описание" class="form-control">{{ task['description'] }}</textarea></p>
+    <p class="center"><label for="task_name">Название:</label><input id="task_name" name="task_name" type="text" class="form-control" value="{{ task['name'] }}" /><button class="btn btn-primary">Сохранить</button></p>
 </form>
+
+<!-- добавляем ссылку на JavaScript-библиотеку jQuery и на скрипт Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>
